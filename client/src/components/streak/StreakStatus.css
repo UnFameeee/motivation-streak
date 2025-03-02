@@ -1,0 +1,121 @@
+.streak-status-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.streak-card {
+  height: 100%;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.streak-card:hover {
+  transform: translateY(-5px);
+}
+
+.translation-streak .card-header {
+  background-color: #72d1a8;
+  color: white;
+}
+
+.writing-streak .card-header {
+  background-color: #5f9ea0;
+  color: white;
+}
+
+.streak-badge {
+  font-size: 1.1rem;
+  padding: 8px 15px;
+  margin-bottom: 10px;
+}
+
+.rank-display {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 5px 0;
+  display: block;
+}
+
+/* Styles for Đại Cảnh Giới tiers based on their colors */
+.dai-canh-gioi {
+  font-weight: bold;
+}
+
+.rank-tier-1 { /* Võ Sĩ */
+  color: #C8A250 !important;
+}
+
+.rank-tier-2 { /* Võ Sư */
+  color: #B0C4DE !important;
+}
+
+.rank-tier-3 { /* Đại Võ Sư */
+  color: #FFA500 !important;
+}
+
+.rank-tier-4 { /* Võ Quân */
+  color: #FFD700 !important;
+}
+
+.rank-tier-5 { /* Võ Vương */
+  color: #0000CD !important;
+}
+
+.rank-tier-6 { /* Võ Tông */
+  color: #800080 !important;
+}
+
+.rank-tier-7 { /* Võ Hoàng */
+  color: #FF0000 !important;
+}
+
+.rank-tier-8 { /* Võ Tôn */
+  color: #A52A2A !important;
+}
+
+.rank-tier-9 { /* Võ Đế */
+  color: #008000 !important;
+}
+
+.canh-con {
+  font-style: italic;
+}
+
+.dang {
+  font-weight: normal;
+}
+
+.current-rank {
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.freeze-info {
+  border-radius: 5px;
+  margin-top: 15px;
+  padding: 10px;
+}
+
+.streak-tips-card {
+  margin-top: 20px;
+  border-left: 5px solid #72d1a8;
+}
+
+.streak-tips-card .card-header {
+  background-color: #f0f8ff;
+  font-weight: bold;
+}
+
+.streak-progress .progress {
+  height: 20px;
+}
+
+.last-activity {
+  font-size: 0.9rem;
+  color: #666;
+} 

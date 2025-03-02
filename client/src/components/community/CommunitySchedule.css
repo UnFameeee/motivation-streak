@@ -1,0 +1,91 @@
+.community-schedule-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.community-schedule-container .card {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+.community-schedule-container .card-header {
+  background-color: #72d1a8 !important;
+  padding: 15px 20px;
+}
+
+.community-schedule-container .card-header h4 {
+  color: white;
+  font-weight: 600;
+}
+
+.community-schedule-container hr {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.community-schedule-container .form-label {
+  font-weight: 500;
+  color: #333;
+}
+
+.community-schedule-container .form-text {
+  margin-top: 5px;
+  display: block;
+}
+
+.community-schedule-container .form-switch {
+  padding-left: 2.5em;
+}
+
+.community-schedule-container .form-switch .form-check-input {
+  width: 3em;
+  height: 1.5em;
+  margin-left: -2.5em;
+}
+
+.community-schedule-container .form-switch .form-check-input:checked {
+  background-color: #72d1a8;
+  border-color: #72d1a8;
+}
+
+.community-schedule-container .form-control:focus,
+.community-schedule-container .form-select:focus,
+.community-schedule-container .form-check-input:focus {
+  border-color: #72d1a8;
+  box-shadow: 0 0 0 0.25rem rgba(114, 209, 168, 0.25);
+}
+
+.community-schedule-container .btn-primary {
+  background-color: #72d1a8;
+  border-color: #72d1a8;
+}
+
+.community-schedule-container .btn-primary:hover {
+  background-color: #5aaf8c;
+  border-color: #5aaf8c;
+}
+
+/* Timezone select styling */
+.community-schedule-container .react-timezone-select__control {
+  border-color: #ced4da;
+  border-radius: 0.25rem;
+  min-height: 38px;
+}
+
+.community-schedule-container .react-timezone-select__control:hover {
+  border-color: #adb5bd;
+}
+
+.community-schedule-container .react-timezone-select__control--is-focused {
+  border-color: #72d1a8 !important;
+  box-shadow: 0 0 0 0.25rem rgba(114, 209, 168, 0.25) !important;
+}
+
+.community-schedule-container .react-timezone-select__option--is-selected {
+  background-color: #72d1a8 !important;
+}
+
+.community-schedule-container .react-timezone-select__option:hover {
+  background-color: rgba(114, 209, 168, 0.15) !important;
+} 

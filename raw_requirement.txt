@@ -1,0 +1,58 @@
+Viết cho tôi 1 cái requirement cho dự án: "Dịch thuật mỗi ngày với tiếng anh"
+Technical Requirement:
+- Sử dụng MySQL, React, ExpressJS, Bootstrap
+- Sử dụng Code First, có lệnh npm run init-db để add migration
+- Cấu trúc folder sẽ bao gồm: "Utils, service, controller, route, views, database, assets", tất cả những gì liên quan đến database sẽ được lưu vào trong folder database, khi API gọi đến sẽ đi theo flow sau server.js -> route -> controller -> service -> database
+- các table luôn luôn sẽ có cột created_at, updated_at, deleted_at, deleted, và tên của table sẽ được đặt theo dạng "tên_bảng" và là tiếng anh. Các cột ID mặc định sẽ sử dụng GUID
+- table user sẽ có cờ is_active (true/false) và timezone.
+- sẽ có table setting (key, value, description) để lưu các setting của hệ thống (và chỉ có admin được vào và sửa đổi)
+- Có file env, và lưu ý tất cả các AI prompt (AI prompt là master prompt sẽ cover đi user-prompt) sẽ được lưu vào trong file env.
+- Có sử dụng JWT token để xác thực người dùng, chỉ sử dụng access_token. access_token sẽ được lưu vào local storage, và không cần sử dụng gì liên quan đến cookie. Khi access_token hết hạn thì sẽ redirect người dùng về trang login và xóa token đó đi.
+- Tất cả các logic liên quan đến AI sẽ sử dụng dùng API (axois) để gọi đến endpoint
+- UI/UX sẽ được sử dụng bootstrap, giao diện đẹp mắt, hiện đại, màu chủ đạo là #72d1a8
+- Tất cả các trang sẽ có header, footer, sidebar.
+- Tất cả các table UI/UX của hệ thống sẽ có filter, sort, pagination, search, và các cột sẽ được tự động wrap text.
+
+Functional Requirement:
+- AI tôi sử dụng trong hệ thống sẽ là Gemini AI của Google
+- Tạo 1 trang login, trang login sẽ có 2 loại user là user và admin.
+- User sẽ có các chức năng:
+    + Đăng ký / đăng nhập tài khoản (bắt buộc đăng ký và đăng nhập bằng Google) - và mặc định tạo role là user, không được set role là admin
+    + Đăng xuất
+    + Quên mật khẩu
+    + Đổi mật khẩu
+    + Xem lịch sử dịch thuật
+    + Xem danh sách từ vựng
+    + Xem danh sách người dùng
+- Mục tiêu chính của trang web là trang chủ sẽ có các community, bân trong community sẽ là block tượng trưng cho các ngày, khi nhấn vào mỗi block thì sẽ hiển thị các post các bài văn tương ứng với ngày đó. Các post sẽ là các bài văn được viết và có thể chọn ngôn ngữ được viết bởi 1 user, và các user khác hoặc chính user đó có thể vào để vào để đọc và comment vào bản dịch thuật với bài viết đó bằng của ngôn ngữ họ. Và sau đó có thể nhấn vào một nút để AI chấm điểm bản dịch thuật dựa trên bài viết gốc và hiển thị kết quả.
+- Các user có thể highlight một hoặc nhiều từ trong bài viết gốc hoặc bài dịch thuật để nhận xét (nhận xét này khác với comment bản dịch thuật).
+- Các community có thể setup lịch (setup giờ, múi giờ, period) để tự động tạo các block sau mỗi 1 period sẽ ví dụ: (tự động tạo block mới mỗi ngày vào lúc 06:00 AM (UTC + 7)). Và có thể có toggle option là các block được tạo ra sẽ tự động gen title hay không, nếu có thì sẽ hiển thị 1 user-prompt để nhập nội dung của title là gì, nếu không thì sẽ tự động sử dụng ngày tháng năm hiện tại theo format (dd-mm-yyyy). Và có thêm 1 toggle option là các block được tạo ra có sẵn post với bên trong là một bài viết được tự động dùng AI gen với user-prompt nội dung là gì và giới hạn bao nhiêu từ (min 50 từ, max 1000 từ - tôi có thể config số này ở trong setting).
+- Sẽ có tính các streak ngày liên tục để động viên người dùng viết bài và dịch thuật. Cách tính streak sẽ như sau:
+  + Sẽ có "Đại Cảnh Giới", "Cảnh Con" và "Đẳng", và các streak sẽ được dùng để tính các "Đại Cảnh Giới", "Cảnh Con" và "Đẳng" này 1 tổ hợp "Đại Cảnh Giới" và "Cảnh Con", "Đẳng" sẽ được gọi lả Rank. Cách display rank sẽ là "Đại Cảnh Giới" - "Cảnh Con" - "Đẳng".
+  + Mỗi user sẽ có 2 loại rank: 1 là rank của hoạt động dịch thuật (Gọi là "Luyện Thuật Sư"), 1 là rank của hoạt động đăng bài viết. 2 là rank của hoạt động đăng bài viết (Gọi là "Võ Sư").
+  + "Luyện Thuật Sư" sẽ là tên gọi rank của "Diệu Thuật Bảng" và "Võ Sư" sẽ là tên gọi rank của "Phong Vân Bảng".
+
+  + Cách tính rank:
+    - Sẽ có một hằng số X tương ứng với từng rank, ví dụ: (hằng số X) sẽ dùng làm công thức tính cho rank của "Luyện Thuật Sư" trong "Diệu Thuật Bảng" và (hằng số Y) sẽ dùng làm công thức tính cho rank của "Võ Sư" trong "Phong Vân Bảng".
+
+    + Sẽ có xếp hạng ranking các streak dài nhất của hoạt động dịch thuật của user được gọi là "Diệu Thuật Bảng". "Diệu Thuật Bảng" sẽ được cập nhật 2 tiếng 1 lần.
+    + Công thức tính rank của "Luyện Thuật Sư" sẽ là: 
+      + Công thức tính "Đẳng": ([số ngày liên tục dịch thuật] / ([hằng số X] / [Tổng số lượng dòng của Đẳng])) mod [Tổng số lượng dòng của Đẳng].
+      Ví dụ: Số ngày liên tục dịch thuật = 10, hằng số X = 3, Tổng số lượng dòng của Đẳng = 3. Vậy ta có (10 / (3 / 3)) mod (3) = 1 => Đẳng tier 2
+      + Công thức tính "Cảnh con": ([số ngày liên tục dịch thuật] / ([hằng số X] / [Tổng số lượng dòng của Đẳng])) mod ([hằng số X] / [Tổng số lượng dòng của Đẳng])
+      Ví dụ: Số ngày liên tục dịch thuật = 13, hằng số X = 3. Vậy ta có (13 / (9*3)) mod (9*3) = 4.3 => Cảnh con tier 5
+      + Công thức tính "Đại cảnh giới": [số ngày liên tục dịch thuật] / ([hằng số X] * [Tổng số lượng dòng của Đại Cảnh Giới] * [Tổng số lượng dòng của Cảnh Con]) mod ([hằng số X] * [Tổng số lượng dòng của Đại Cảnh Giới] * [Tổng số lượng dòng của Cảnh Con]). 
+      Ví dụ: Số ngày liên tục dịch thuật = 400, hằng số X = 3. Vậy ta có (400 / (9*9*3)) mod (9*9*3) = 1.64 => Đại cảnh giới tier 2
+
+    + Sẽ có xếp hạng ranking các streak dài nhất của hoạt động đăng bài viết của user được gọi là "Phong Vân Bảng". "Phong Vân Bảng" sẽ được cập nhật 2 tiếng 1 lần.
+    + Công thức tính rank của "Võ Sư" sẽ là: 
+      + Công thức tính "Đẳng": ([số ngày liên tục dịch thuật] / ([hằng số X] / [Tổng số lượng dòng của Đẳng])) mod [Tổng số lượng dòng của Đẳng].
+      Ví dụ: Số ngày liên tục dịch thuật = 10, hằng số X = 3, Tổng số lượng dòng của Đẳng = 3. Vậy ta có (10 / (3 / 3)) mod (3) = 1 => Đẳng tier 2
+      + Công thức tính "Cảnh con": ([số ngày liên tục dịch thuật] / ([hằng số X] / [Tổng số lượng dòng của Đẳng])) mod ([hằng số X] / [Tổng số lượng dòng của Đẳng])
+      Ví dụ: Số ngày liên tục dịch thuật = 13, hằng số X = 3. Vậy ta có (13 / (9*3)) mod (9*3) = 4.3 => Cảnh con tier 5
+      + Công thức tính "Đại cảnh giới": [số ngày liên tục dịch thuật] / ([hằng số X] * [Tổng số lượng dòng của Đại Cảnh Giới] * [Tổng số lượng dòng của Cảnh Con]) mod ([hằng số X] * [Tổng số lượng dòng của Đại Cảnh Giới] * [Tổng số lượng dòng của Cảnh Con]). 
+      Ví dụ: Số ngày liên tục dịch thuật = 400, hằng số X = 3. Vậy ta có (400 / (9*9*3)) mod (9*9*3) = 1.64 => Đại cảnh giới tier 2
+
+  + Streak chỉ được tính khi 2 ngày liên tục có hoạt động đăng / dịch thuật. Streak của hoạt động đăng sẽ khác Streak của hoạt động dịch thuật.
+  + Các Streak của dịch thuật chỉ tính trên ngày có hoạt động đăng hoặc dịch thuật, ví dụ hôm nay có dịch 3 bài thì streak vẫn tính là 1 chứ không phải là 2
+  + Các Streak khi bị gián đoạn thì sẽ được freeze tối đa 2 ngày, trong 2 ngày đó thì sẽ có nhiệm vụ là người dùng phải 3 viết bài để tiếp tục streak của "Phong Vân Bảng" hoặc dịch thuật 3 bài để có thể tiếp tục tính streak của "Diệu Thuật Bảng".
